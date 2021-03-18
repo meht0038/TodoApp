@@ -18,7 +18,7 @@ class CreateChurchesTable extends Migration
             $table->string('name');
             $table->string('address');
             $table->string('creator')->unique();
-            $table->boolean('active');            
+            $table->boolean('active'); 
             $table->timestamps();
         });
     }
@@ -30,6 +30,7 @@ class CreateChurchesTable extends Migration
      */
     public function down()
     {
+        DB::statement('SET FOREIGN_KEY_CHECKS = 0');
         Schema::dropIfExists('churches');
     }
 }
