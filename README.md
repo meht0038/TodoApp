@@ -13,7 +13,9 @@ Users can only input donation information. They will be able to see a dropdown l
 -WORKFLOW/STEPS FOR INTENDED USAGE-
 
 1: An office administrator (Or person of high enough authority) creates an admin account on the website hosting this service. As a part of the sign-up process they fill in information for their church.
+
 2: Once they have created their admin account and church, the admin fills in data for their donators. This would include 'envelope numbers', real names, addresses and phone numbers (Emails will be optional). The admin will then fill in information for their associated charities and the sub-categories that donations can be directed to (If inapplicable, simply create a 'general' category).
+
 3: The admin account creates user accounts for whoever will be handling the input of donations (Volunteers/other office employees). When they create the account, the login credentials will go the email address of the intended user. The user may then login using those credentials and access the form for inputting donations.
 
 
