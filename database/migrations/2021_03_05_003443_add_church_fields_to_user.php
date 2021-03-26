@@ -17,8 +17,8 @@ class AddChurchFieldsToUser extends Migration
             //
             $table->string('user_type')->default(0);
             $table->boolean('active')->default(true);
-            $table->unsignedBigInteger('church_id')->default(0);
-            //$table->foreign('church')->references('id')->on('churches');
+            $table->unsignedBigInteger('church_id')->nullable();
+            $table->foreign('church_id')->references('id')->on('churches');
 
         });
     }
@@ -30,8 +30,10 @@ class AddChurchFieldsToUser extends Migration
      */
     public function down()
     {
+        DB::statement('SET FOREIGN_KEY_CHECKS=0');
         Schema::table('users', function (Blueprint $table) {
             //
         });
+        DB::statement('SET FOREIGN_KEY_CHECKS=1');
     }
 }
