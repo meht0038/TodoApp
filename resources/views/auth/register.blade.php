@@ -1,3 +1,4 @@
+
 <x-guest-layout>
     <x-jet-authentication-card>
         <x-slot name="title">
@@ -10,6 +11,16 @@
             @csrf
 
             <div>
+                <div class="flex-row-reverse flex justify-between">
+                    
+                    <div class="pl-3 pb-5">
+                        <label for="user">User</label>
+                        <input type="radio" name="radAdmin" value="false" value="user" class="ml-1" checked="checked" onclick="hideChurchData()">
+                        <label for="admin" class="pl-4">Church Admin</label>
+                        <input type="radio" name="radAdmin" value="true" value="admin" class="ml-1" onclick="showChurchData()">
+                    </div>
+                    
+                </div>
                 <x-jet-label for="name" value="{{ __('Name') }}" />
                 <x-jet-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
             </div>
@@ -27,6 +38,21 @@
             <div class="mt-4">
                 <x-jet-label for="password_confirmation" value="{{ __('Confirm Password') }}" />
                 <x-jet-input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation" required autocomplete="new-password" />
+            </div>
+            </br>
+            <div class="grid grid-cols-2" id="church-form" style="display: none">
+                <div class="mt-4">
+                    <x-jet-label for="church_name" value="{{ __('Church Name') }}" />
+                    <x-jet-input id="church_name" class="block mt-1 w-full" type="text" name="church_name" required="false" />
+                </div>
+                <div class="mt-4">
+                    <x-jet-label for="address" value="{{ __('Address') }}" />
+                    <x-jet-input id="address" class="block mt-1 w-full" type="text" name="address" required="false"/>
+                </div>
+                <div class="mt-4">
+                    <x-jet-label for="description" value="{{ __('Description') }}" />
+                    <textarea id="description" class="block mt-1 w-full" name="description" required="false"></textarea>
+                </div>
             </div>
 
             @if (Laravel\Jetstream\Jetstream::hasTermsAndPrivacyPolicyFeature())
@@ -58,3 +84,18 @@
         </form>
     </x-jet-authentication-card>
 </x-guest-layout>
+<script>
+    var churchForm = document.getElementById("church-form");
+    function showChurchData() {
+        churchForm.style.display = "block";
+        document.getElementById("church_name").required = true;
+        document.getElementById("address").required = true;
+        document.getElementById("description").required= true;
+    }
+    function hideChurchData() {
+        churchForm.style.display = "none";
+        document.getElementById("church_name").required = false;
+        document.getElementById("address").required = false;
+        document.getElementById("description").required= false;
+    }
+</script>

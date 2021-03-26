@@ -3,6 +3,7 @@
 namespace App\Actions\Fortify;
 
 use App\Models\User;
+use App\Models\Church;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Laravel\Fortify\Contracts\CreatesNewUsers;
@@ -20,6 +21,19 @@ class CreateNewUser implements CreatesNewUsers
      */
     public function create(array $input)
     {
+        $churchId = null;
+        if ($input["radAdmin"] == true) {
+            $church = new Church;
+            $church->active = true;
+            $church->creator = $input['email'];
+            $church->address = $input['address'];
+            $church->name = $input['church_name'];
+            $church->description = $input['description'];
+            $church->save();
+
+            $churchId = Church::where('creator', $input['email'])->first()->id;
+        }
+        
         Validator::make($input, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
@@ -31,6 +45,7 @@ class CreateNewUser implements CreatesNewUsers
             'name' => $input['name'],
             'email' => $input['email'],
             'password' => Hash::make($input['password']),
+            'church_id' => $churchId,
         ]);
     }
 }

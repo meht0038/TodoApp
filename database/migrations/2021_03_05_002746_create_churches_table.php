@@ -16,6 +16,7 @@ class CreateChurchesTable extends Migration
         Schema::create('churches', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('description')->optional;
             $table->string('address');
             $table->string('creator')->unique();
             $table->boolean('active'); 
